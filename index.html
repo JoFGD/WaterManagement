@@ -6,7 +6,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="src/ctrl/initialise.js"></script>
+    <script src="src/view/updateData.js"></script>
     <link rel="stylesheet" href="style.css">
+    <script>
+        window.onload = updateData.setupUserInterface;
+    </script>
 </head>
 <body>
     <div class="container">
@@ -21,30 +26,39 @@
         </div>
       </div>
         <div class="data">
-            <table class="datatable" border="1">
+            <input type="button" value="Refactor Table"  id="RefactorButton" />
+            <table id="datatable" class="datatable" border="1">
                 <tr>
                     <th></th>
-                    <th>Location 1</th>
-                    <th>Location 2</th>
-                    <th>Location 3</th>
-                </tr>
-                <tr>
                     <th>Time 1</th>
-                    <td>Data</td>
-                    <td>Data</td>
-                    <td>Data</td>
-                </tr>
-                <tr>
                     <th>Time 2</th>
-                    <td>data</td>
-                    <td>Data</td>
-                    <td>Data</td>
-                </tr>
-                <tr>
                     <th>Time 3</th>
-                    <td>Data</td>
-                    <td>Data</td>
-                    <td>Data</td>
+                    <th>Time 4</th>
+                    <th>Time 5</th>
+                </tr>
+                <tr id="tr1">
+                    <th><label for="LocSelect1"></label><select name="select1" id="LocSelect1"><option value=""> --- </option></select></th>
+                    <td>$</td>
+                    <td>$</td>
+                    <td>$</td>
+                    <td>$</td>
+                    <td>$</td>
+                </tr>
+                <tr id="tr2">
+                    <th><label for="LocSelect2"></label><select name="select2" id="LocSelect2"><option value=""> --- </option></select></th>
+                    <td>$</td>
+                    <td>$</td>
+                    <td>$</td>
+                    <td>$</td>
+                    <td>$</td>
+                </tr>
+                <tr id="tr3">
+                    <th><label for="LocSelect3"></label><select name="select3" id="LocSelect3"><option value=""> --- </option></select></th>
+                    <td>$</td>
+                    <td>$</td>
+                    <td>$</td>
+                    <td>$</td>
+                    <td>$</td>
                 </tr>
             </table>
             <canvas class="myChart" id="myChart" style="width:80%;max-height: 400px;max-width:80%; margin:20px"></canvas>
@@ -52,24 +66,28 @@
     </div>
     <script>
         function updateChart(){
-            var xValues = [2019,2020,2021,2022,2023];
+            var xValues = ["Time 1","Time 2","Time 3","Time 4","Time 5"];
             new Chart("myChart", {
                 type: "line",
                 data: {
                     labels: xValues,
                     datasets: [{
-                    data: [1,2,3,4,5],
+                    data: [0,0,0,0,0],
                     borderColor: "red",
-                    fill: false
+                    fill: true
                 }, {
-                    data: [6,5,6,5,4],
+                    data: [0,0,0,0,0],
                     borderColor: "green",
-                    fill: false
+                    fill: true
                 }, {
-                    data: [4,7,3,1,7],
+                    data: [0,0,0,0,0],
                     borderColor: "blue",
                     fill: false
-                }]
+                }, {
+                        data: [4,4,4,4,4],
+                        borderColor: "black",
+                        fill: false
+                    }]
                 },
                     options: {
                     legend: {display: false}

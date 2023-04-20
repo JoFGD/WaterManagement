@@ -27,6 +27,22 @@
     position: absolute;
 }
 
+#RefactorButton{
+    background: rgb(210, 238, 238);
+    font-size: 25px;
+    font-family: Monaco,serif;
+    font-weight: bold;
+    letter-spacing: 4px;
+    border: 5px solid #c6dede;
+    cursor: pointer;
+    position: absolute;
+    height: 100px;
+    top:75px;
+    left: 800px;
+    transition: 0.2s all;
+    display: block;
+}
+
 tr {
     border-bottom: 1px solid #000;
     border-top: black;
