@@ -30,9 +30,7 @@ updateData = {
                 document.getElementById("LocSelect2").value,
                 document.getElementById("LocSelect3").value];
 
-            let n = callAPI("Location1");
-
-            alert(JSON.parse(n));
+            callAPI("Location1");
 
             let newData = [];
 
@@ -84,14 +82,16 @@ updateData = {
             var raw = JSON.stringify({"locationName":locationName});
             // create a JSON object with parameters for API call and store in a variable
             var requestOptions = {
-                method: 'GET',
+                method: 'POST',
                 headers: myHeaders,
-                body:raw,
+                body: raw,
                 redirect: 'follow'
             };
             // make API call with parameters and use promises to get response
-            return fetch("https://9lmpmhkrz2.execute-api.ap-southeast-2.amazonaws.com/test", requestOptions)
-                .then(response => response.json());
+            fetch("https://nk3tvryab3.execute-api.ap-southeast-2.amazonaws.com/dev2", requestOptions)
+                .then(response => response.text())
+                .then(result => alert(JSON.parse(result).body))
+                .catch(error => console.log('error', error));
         }
 
         const request = ( url, params = {}, method = 'GET' ) => {
@@ -99,7 +99,7 @@ updateData = {
                 method
             };
 
-            return fetch( url, options ).then( response => response.json() );
+            return fetch( url, options ).then( response => response.json()).then(result => alert(JSON.parse(result)));
         };
         const get = ( url, params ) => request( url, params, 'GET' );
     }
