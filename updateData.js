@@ -25,24 +25,30 @@ updateData = {
             }
         }
 
-        refactorButton.onclick = function (){
+        refactorButton.onclick = async function (){
             let currentLocations = [document.getElementById("LocSelect1").value,
                 document.getElementById("LocSelect2").value,
                 document.getElementById("LocSelect3").value];
-
-            callAPI("Location1");
 
             let newData = [];
 
             for (let i = 0; i<3; i++){
                 let location = currentLocations[i];
-                let locationData = data[location];
+                let locationData = await callAPI(location);
+
+                //if (jsonData === 'error'){
+                //    return;
+                //}
+
+                //let locationData = jsonData["pastValues"]
                 let tds = trs[i].getElementsByTagName("td");
+                //let newData = data[location];
                 newData[i] = locationData;
 
                 for (var j=0; j<tds.length;j++)
                 {
                     tds[j].innerHTML = locationData[j];
+                    //tds[j].innerHTML = newData[j];
                 }
             }
 
@@ -73,9 +79,32 @@ updateData = {
                 }
             });
         }
-        var callAPI = (locationName)=>{
+        // callAPI function that takes the base and exponent numbers as parameters
+
+        var callAPI = async (locationName) => {
+            var myHeaders = new Headers();
+
+            myHeaders.append("Content-Type", "application/json");
+            var raw = JSON.stringify({"locationName":locationName});
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+
+            const response = await fetch("https://h4ooi7iyle.execute-api.ap-southeast-2.amazonaws.com/dev", requestOptions);
+            const result = await response.json();
+            const pastValues = result["pastValues"];
+            alert("success");
+            return pastValues;
+        };
+
+        /*var callAPI2 = (locationName)=>{
             // instantiate a headers object
             var myHeaders = new Headers();
+            var temp;
             // add content type header to object
             myHeaders.append("Content-Type", "application/json");
             // using built in JSON utility package turn object to string and store in a variable
@@ -88,20 +117,27 @@ updateData = {
                 redirect: 'follow'
             };
             // make API call with parameters and use promises to get response
-            fetch("https://nk3tvryab3.execute-api.ap-southeast-2.amazonaws.com/dev2", requestOptions)
-                .then(response => response.text())
-                .then(result => alert(JSON.parse(result).body))
-                .catch(error => console.log('error', error));
-        }
+            let z = !async function() {
+                let x = await fetch("https://h4ooi7iyle.execute-api.ap-southeast-2.amazonaws.com/dev", requestOptions)
+                    .then((response) => response.json())
+                    .then((result) => {
+                        return result;
+                    })
+                alert(x["currentValue"]);
+                let y = x["pastValues"];
+                z = y;
+                alert(z[0]);
+                alert(y[1]);
+                return y;
+            }();
+            alert(z);
+            return z;
+        }*/
 
-        const request = ( url, params = {}, method = 'GET' ) => {
-            let options = {
-                method
-            };
-
-            return fetch( url, options ).then( response => response.json()).then(result => alert(JSON.parse(result)));
-        };
-        const get = ( url, params ) => request( url, params, 'GET' );
+        //async function getData(locationName){
+        //    const data = await callAPI(locationName);
+        //    return data;
+        //}
     }
 }
 

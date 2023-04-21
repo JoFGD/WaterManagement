@@ -28,6 +28,7 @@
 }
 
 #RefactorButton{
+    background: rgb(255, 0, 0);
     background: rgb(210, 238, 238);
     font-size: 25px;
     font-family: Monaco,serif;
