@@ -79,7 +79,6 @@ updateData = {
                 }
             });
         }
-        // callAPI function that takes the base and exponent numbers as parameters
 
         var callAPI = async (locationName) => {
             var myHeaders = new Headers();
@@ -100,44 +99,6 @@ updateData = {
             alert("success");
             return pastValues;
         };
-
-        /*var callAPI2 = (locationName)=>{
-            // instantiate a headers object
-            var myHeaders = new Headers();
-            var temp;
-            // add content type header to object
-            myHeaders.append("Content-Type", "application/json");
-            // using built in JSON utility package turn object to string and store in a variable
-            var raw = JSON.stringify({"locationName":locationName});
-            // create a JSON object with parameters for API call and store in a variable
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-            // make API call with parameters and use promises to get response
-            let z = !async function() {
-                let x = await fetch("https://h4ooi7iyle.execute-api.ap-southeast-2.amazonaws.com/dev", requestOptions)
-                    .then((response) => response.json())
-                    .then((result) => {
-                        return result;
-                    })
-                alert(x["currentValue"]);
-                let y = x["pastValues"];
-                z = y;
-                alert(z[0]);
-                alert(y[1]);
-                return y;
-            }();
-            alert(z);
-            return z;
-        }*/
-
-        //async function getData(locationName){
-        //    const data = await callAPI(locationName);
-        //    return data;
-        //}
     }
 }
 
